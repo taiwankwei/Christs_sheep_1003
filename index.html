@@ -86,38 +86,6 @@
       animation: glassPulse 3.6s ease-in-out infinite;
       will-change: opacity;
     }
-    .swallow-flight {
-      position: absolute;
-      left: -5rem;
-      top: 88%;
-      z-index: 15;
-      width: 6rem;
-      height: 4rem;
-      pointer-events: none;
-      color: rgba(69, 47, 30, .88);
-      filter: drop-shadow(0 2px 2px rgba(255,255,255,.45));
-      animation: swallowRoute 24s linear infinite;
-      will-change: transform;
-    }
-    .swallow-flight.second { left: -7.5rem; top: 94%; animation-delay: -.42s; transform-origin: center; color: rgba(83,55,34,.82); }
-    .swallow-flight svg { width: 100%; height: 100%; overflow: visible; }
-    .swallow-wing-left { transform-origin: 47% 48%; animation: wingLeft .72s ease-in-out infinite; }
-    .swallow-wing-right { transform-origin: 53% 48%; animation: wingRight .72s ease-in-out infinite; }
-    .swallow-flight.second .swallow-wing-left,
-    .swallow-flight.second .swallow-wing-right { animation-delay: -.22s; }
-    @keyframes wingLeft { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(18deg)} }
-    @keyframes wingRight { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(-18deg)} }
-    @keyframes swallowRoute {
-      0%   { transform: translate3d(0,0,0) rotate(-18deg) scale(.72); opacity:0; }
-      4%   { opacity:1; }
-      48%  { transform: translate3d(78vw,-70vh,0) rotate(-25deg) scale(.95); opacity:1; }
-      58%  { transform: translate3d(86vw,-76vh,0) rotate(12deg) scale(.92); }
-      68%  { transform: translate3d(75vw,-82vh,0) rotate(155deg) scale(.88); }
-      78%  { transform: translate3d(62vw,-76vh,0) rotate(202deg) scale(.9); }
-      88%  { transform: translate3d(72vw,-69vh,0) rotate(325deg) scale(.92); opacity:1; }
-      96%  { transform: translate3d(86vw,-76vh,0) rotate(372deg) scale(.9); opacity:1; }
-      100% { transform: translate3d(86vw,-76vh,0) rotate(372deg) scale(.9); opacity:0; }
-    }
     .hero-copy {
       width: min(100%, 52rem);
       text-shadow: 0 2px 2px rgba(255,255,255,.95), 0 0 10px rgba(255,255,255,.98), 0 0 24px rgba(255,255,255,.92), 0 3px 5px rgba(40,32,22,.38);
@@ -159,7 +127,6 @@
       .hero-copy > p.max-w-2xl { font-size: .85rem !important; line-height: 1.75rem !important; margin-bottom: 1.35rem !important; }
       .date-glass { font-size: .78rem !important; padding: .55rem 1.35rem !important; margin-bottom: 1.25rem !important; }
       .hero-copy > button { width: min(100%, 19rem); justify-content: center; padding: .9rem 1.25rem !important; }
-      .swallow-flight { width: 4.7rem; height: 3.2rem; }
 
       /* Main padding */
       main { padding-left: .85rem !important; padding-right: .85rem !important; padding-top: .75rem !important; }
@@ -258,20 +225,6 @@
     <div class="absolute inset-0">
       <div class="absolute inset-0 z-10" style="background:rgba(247,242,233,.25)"></div>
       <img src="https://duk.tw/pQlQLJ.png" alt="Beitou Background" class="w-full h-full object-cover opacity-100" />
-    </div>
-    <div class="swallow-flight" aria-hidden="true">
-      <svg viewBox="0 0 120 72" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path class="swallow-wing-left" d="M57 34C42 17 22 9 5 12c13 7 20 18 24 32 8-7 17-10 28-10Z"/>
-        <path class="swallow-wing-right" d="M63 34c15-17 35-25 52-22-13 7-20 18-24 32-8-7-17-10-28-10Z"/>
-        <path d="M48 31c7-5 17-5 24 0l-5 15 12 19-19-12-19 12 12-19-5-15Z"/>
-      </svg>
-    </div>
-    <div class="swallow-flight second" aria-hidden="true">
-      <svg viewBox="0 0 120 72" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path class="swallow-wing-left" d="M57 34C42 17 22 9 5 12c13 7 20 18 24 32 8-7 17-10 28-10Z"/>
-        <path class="swallow-wing-right" d="M63 34c15-17 35-25 52-22-13 7-20 18-24 32-8-7-17-10-28-10Z"/>
-        <path d="M48 31c7-5 17-5 24 0l-5 15 12 19-19-12-19 12 12-19-5-15Z"/>
-      </svg>
     </div>
     <div class="hero-copy relative z-20 text-center px-6 py-12 flex flex-col items-center justify-center text-stone-800 max-w-3xl mx-auto">
       <p class="text-sm md:text-base font-bold tracking-[0.55em] text-[#8a795f] mb-7">基督的羊　北投・2026 秋</p>
