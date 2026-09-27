@@ -74,9 +74,8 @@
     /* ── Mobile overrides ── */
     @media (max-width: 640px) {
       /* Hero */
-      header { min-height: 420px !important; }
-      header h1 { font-size: 2.5rem !important; }
-      header p  { font-size: 1rem !important; letter-spacing: 0.08em !important; }
+      header { min-height: 700px !important; }
+      header h1 { font-size: 2.45rem !important; }
       .hero-date { font-size: 0.75rem !important; padding: 0.5rem 1.25rem !important; margin-bottom: 1.5rem !important; }
 
       /* Main padding */
@@ -130,18 +129,28 @@
 <body class="min-h-screen bg-stone-50 font-sans text-gray-800 antialiased">
 
   <!-- ═══ HERO ═══ -->
-  <header class="relative flex items-center justify-center overflow-hidden shadow-2xl text-white" style="min-height:580px">
+  <header class="relative flex items-center justify-center overflow-hidden shadow-2xl" style="min-height:680px;background:#f5efe5">
     <div class="absolute inset-0">
-      <div class="absolute inset-0 z-10" style="background:linear-gradient(to bottom,rgba(181,74,94,.3),rgba(46,125,50,.5))"></div>
-      <img src="https://duk.tw/pQlQLJ.png" alt="Beitou Background" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 z-10" style="background:rgba(247,242,233,.88)"></div>
+      <img src="https://duk.tw/pQlQLJ.png" alt="Beitou Background" class="w-full h-full object-cover opacity-20" />
     </div>
-    <div class="relative z-20 text-center px-4 flex flex-col items-center justify-center">
-      <div class="hero-date animate-pulse bg-white/20 backdrop-blur-md inline-block px-8 py-3 rounded-2xl font-black mb-10 border border-white/30 shadow-lg text-sm md:text-lg lg:text-xl tracking-widest">
-        2026.10.03(六)
-      </div>
-      <p class="text-base md:text-xl font-light tracking-[0.15em] md:tracking-[0.2em] opacity-90 mb-2">Christ's sheep</p>
-      <h1 class="text-4xl md:text-7xl font-bold mb-4 md:mb-6 drop-shadow-2xl">基督的羊</h1>
-      <p class="text-lg md:text-2xl opacity-95 font-light tracking-[0.1em] md:tracking-[0.15em] italic mb-8 md:mb-10" style="font-family:Georgia,serif">主愛 · 澆灌 · 相契 · 生命</p>
+    <div class="relative z-20 text-center px-6 py-12 flex flex-col items-center justify-center text-stone-800 max-w-3xl mx-auto">
+      <svg class="w-40 md:w-48 h-auto mb-5" viewBox="0 0 180 82" fill="none" aria-hidden="true">
+        <path d="M20 68 61 21l30 31 28-34 41 50H20Z" stroke="#8a795f" stroke-width="2.4" stroke-linejoin="round"/>
+        <circle cx="119" cy="17" r="3.2" fill="#8a795f"/>
+        <path d="M5 13c5-8 11-8 16 0M24 8c6-9 13-9 19 0M137 12c5-8 11-8 16 0M157 8c6-9 13-9 19 0" stroke="#d17a42" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <p class="text-sm md:text-base font-bold tracking-[0.55em] text-[#8a795f] mb-7">基督的羊　北投・2026 秋</p>
+      <h1 class="text-[2.55rem] leading-[1.25] md:text-6xl md:leading-[1.22] font-black tracking-[0.04em] mb-5" style="font-family:'Noto Serif TC','Songti TC','PMingLiU',serif">
+        <span class="block">溫泉裡的溫柔</span>
+        <span class="block">山色中的應許</span>
+      </h1>
+      <p class="text-base md:text-lg tracking-[0.18em] text-stone-600 mb-7" style="font-family:'Noto Serif TC','Songti TC','PMingLiU',serif">詩歌裡的光，箴言裡的路</p>
+      <div class="w-14 h-px bg-[#c8733f] mb-7"></div>
+      <p class="max-w-2xl text-sm md:text-base leading-8 text-stone-600 mb-8" style="font-family:'Noto Serif TC','Songti TC','PMingLiU',serif">
+        在北投的溫泉煙嵐裡，慢下來。聽一首歌、讀一句箴言、說一段真心話。<br class="hidden md:block">
+        像老朋友一樣圍坐一桌，吃頓晚餐，也留一點時間，聽聽那些關於盼望的故事。
+      </p>
       <button onclick="openOrderModal(true)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-10 py-4 rounded-full shadow-lg transition-all transform hover:-translate-y-1 hover:shadow-xl active:translate-y-0 text-sm md:text-base tracking-[0.2em] flex items-center gap-2 border border-white/25 backdrop-blur-sm">
         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         立即報名及點餐
