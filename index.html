@@ -165,7 +165,7 @@
       <div class="w-14 h-px bg-[#c8733f] mb-7"></div>
       <p class="max-w-2xl text-sm md:text-base leading-8 text-stone-600 mb-8" style="font-family:'Noto Serif TC','Songti TC','PMingLiU',serif">
         在北投的溫泉煙嵐裡，慢下來。聽一首歌、讀一句箴言、說一段真心話。<br class="hidden md:block">
-        像老朋友一樣圍坐一桌，吃頓晚餐，也留一點時間，聽聽那些關於盼望的故事。
+        像老朋友一樣圍坐一桌，吃頓午餐，也留一點時間，聽聽那些關於盼望的故事。
       </p>
       <div class="date-glass mb-7 rounded-full px-8 py-2.5 text-sm md:text-base font-black tracking-[0.22em] text-[#594a38]" aria-label="聚會日期 10月3日星期六">
         10.03(六)
@@ -312,22 +312,6 @@
       <!-- ═══ MENU ═══ -->
       <div id="tab-menu" class="tab-content space-y-8">
         
-        <!-- 個人點餐狀態卡 -->
-        <div id="personal-order-card" class="bg-amber-50/75 border border-amber-100 rounded-3xl p-5 md:p-6 hidden">
-          <div class="flex items-center justify-between flex-wrap gap-2">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">✨</span>
-              <div>
-                <h4 class="font-bold text-gray-800 text-sm md:text-base">您已完成報名及點餐</h4>
-                <p id="personal-order-summary" class="text-xs text-amber-700 mt-0.5"></p>
-              </div>
-            </div>
-            <button onclick="openOrderModal()" class="text-xs bg-amber-600 hover:bg-amber-700 text-white font-bold px-4 py-2 rounded-xl transition-colors shadow-sm">
-              修改報名及餐點
-            </button>
-          </div>
-        </div>
-
         <!-- Hero Banner -->
         <div class="rounded-[2.5rem] p-8 md:p-10 text-white shadow-xl relative overflow-hidden" style="background:linear-gradient(135deg,#1b5e20,#2e7d32)">
           <div class="relative z-10">
@@ -380,13 +364,13 @@
             <div>
               <h4 class="text-xl font-black text-emerald-800 mb-4">義大利麵 <span class="text-sm font-normal text-gray-400">Pasta</span></h4>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-tomato-pasta_20260519_205242.jpg" alt="蕃茄臘肉麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">蕃茄臘肉麵</h5><p class="text-xs text-gray-500 mt-1">酸甜蕃茄醬汁搭配煙燻臘肉，鹹香濃郁。</p></div></article>
-                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-lasagna_20260519_205137.jpg" alt="蕃茄乳酪麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">蕃茄乳酪麵</h5><p class="text-xs text-gray-500 mt-1">蕃茄與乳酪細火燉煮，柔滑濃香。</p></div></article>
-                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-braised-chicken_20260519_205023.jpg" alt="清炒蕃茄香腸肉麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">清炒蕃茄香腸肉麵</h5><p class="text-xs text-gray-500 mt-1">自製香腸肉與蕃茄清炒，經典義式家常風味。</p></div></article>
-                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-bbq-squid_20260525_142230.png" alt="青醬透抽麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">青醬透抽麵</h5><p class="text-xs text-gray-500 mt-1">自製羅勒青醬搭配嫩烤透抽，鮮香交融。</p></div></article>
-                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-pesto-pizza_20260519_205320.jpg" alt="青醬乳酪與風乾蕃茄麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">青醬乳酪與風乾蕃茄麵</h5><p class="text-xs text-gray-500 mt-1">清新羅勒、濃郁乳酪與風乾蕃茄層次分明。</p></div></article>
-                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-ratatouille_20260519_205058.jpg" alt="清炒松露野菇麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">清炒松露野菇麵 <span class="text-xs text-emerald-600">蛋奶素</span></h5><p class="text-xs text-gray-500 mt-1">多種野菇清炒，佐以黑松露提香。</p></div></article>
-                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-salad_20260519_205210.jpg" alt="酒醋時蔬麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">酒醋時蔬麵 <span class="text-xs text-emerald-600">全素</span></h5><p class="text-xs text-gray-500 mt-1">時令蔬菜與酒醋快炒，酸香平衡。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 bg-stone-50"><div class="p-4"><h5 class="font-black">蕃茄臘肉麵</h5><p class="text-xs text-gray-500 mt-1">酸甜蕃茄醬汁搭配煙燻臘肉，鹹香濃郁。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 bg-stone-50"><div class="p-4"><h5 class="font-black">蕃茄乳酪麵</h5><p class="text-xs text-gray-500 mt-1">蕃茄與乳酪細火燉煮，柔滑濃香。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 bg-stone-50"><div class="p-4"><h5 class="font-black">清炒蕃茄香腸肉麵</h5><p class="text-xs text-gray-500 mt-1">自製香腸肉與蕃茄清炒，經典義式家常風味。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 bg-stone-50"><div class="p-4"><h5 class="font-black">青醬透抽麵</h5><p class="text-xs text-gray-500 mt-1">自製羅勒青醬搭配嫩烤透抽，鮮香交融。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 bg-stone-50"><div class="p-4"><h5 class="font-black">青醬乳酪與風乾蕃茄麵</h5><p class="text-xs text-gray-500 mt-1">清新羅勒、濃郁乳酪與風乾蕃茄層次分明。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 bg-stone-50"><div class="p-4"><h5 class="font-black">清炒松露野菇麵 <span class="text-xs text-emerald-600">蛋奶素</span></h5><p class="text-xs text-gray-500 mt-1">多種野菇清炒，佐以黑松露提香。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 bg-stone-50"><div class="p-4"><h5 class="font-black">酒醋時蔬麵 <span class="text-xs text-emerald-600">全素</span></h5><p class="text-xs text-gray-500 mt-1">時令蔬菜與酒醋快炒，酸香平衡。</p></div></article>
               </div>
             </div>
             <div>
@@ -855,6 +839,16 @@
     </div>
   </div>
 
+  <!-- 報名成功訊息框 -->
+  <div id="registration-success" class="fixed inset-0 z-[120] hidden items-center justify-center p-4" style="background:rgba(0,0,0,.48);backdrop-filter:blur(5px)">
+    <div class="w-full max-w-sm rounded-[2rem] bg-white p-8 text-center shadow-2xl border border-emerald-100">
+      <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50 text-5xl" aria-hidden="true">🎉</div>
+      <h3 class="text-2xl font-black text-emerald-800 mb-2">報名成功！</h3>
+      <p class="text-sm leading-6 text-gray-500 mb-6">已收到您的報名與餐點資訊，期待十月三日與您見面。</p>
+      <button onclick="closeRegistrationSuccess()" class="w-full rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white shadow-md transition-colors hover:bg-emerald-700">好的，謝謝 ✨</button>
+    </div>
+  </div>
+
   <script>
     // ── WEATHER ──
     const WEATHER_CODES = {
@@ -1097,6 +1091,18 @@
         modal.classList.add('hidden');
       }, 300);
     }
+
+    function showRegistrationSuccess() {
+      const success = document.getElementById('registration-success');
+      success.classList.remove('hidden');
+      success.classList.add('flex');
+    }
+
+    function closeRegistrationSuccess() {
+      const success = document.getElementById('registration-success');
+      success.classList.add('hidden');
+      success.classList.remove('flex');
+    }
     
     // ── FIREBASE CONFIGURATION ──
     const firebaseConfig = {
@@ -1299,10 +1305,9 @@
         console.error('Failed to copy order info: ', err);
       });
 
-      // 5. 立即回應「點餐成功，謝謝」並關閉視窗與更新標籤頁顯示
-      alert('報名及點餐完成，謝謝！');
+      // 5. 關閉報名視窗並顯示報名成功訊息框
       closeOrderModal();
-      updateMenuTabDisplay();
+      showRegistrationSuccess();
       
       // 6. 延遲恢復按鈕狀態（確保使用者關閉視窗後，下一次打開時按鈕已恢復，但期間不被重複點擊）
       if (submitBtn) {
@@ -1318,6 +1323,7 @@
       const main = localStorage.getItem('g12_order_main');
       const card = document.getElementById('personal-order-card');
       const summary = document.getElementById('personal-order-summary');
+      if (!card || !summary) return;
       
       if (name && main) {
         card.classList.remove('hidden');
