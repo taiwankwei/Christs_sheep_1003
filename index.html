@@ -67,6 +67,9 @@
     #tab-nav::-webkit-scrollbar { display:none; }
     .ws-preline { white-space: pre-line; }
     a { text-decoration: none; }
+    .meal-qty { display:flex; align-items:center; justify-content:space-between; gap:.75rem; padding:.75rem 1rem; border:1px solid rgb(231 229 228); border-radius:1rem; background:rgb(250 250 249); font-size:.78rem; font-weight:700; color:rgb(55 65 81); }
+    .menu-item-qty { width:4rem; padding:.45rem .55rem; border:1px solid rgb(214 211 209); border-radius:.75rem; background:white; text-align:center; outline:none; }
+    .menu-item-qty:focus { border-color:rgb(16 185 129); box-shadow:0 0 0 3px rgb(16 185 129/.12); }
 
     /* ── Mobile overrides ── */
     @media (max-width: 640px) {
@@ -141,7 +144,7 @@
       <p class="text-lg md:text-2xl opacity-95 font-light tracking-[0.1em] md:tracking-[0.15em] italic mb-8 md:mb-10" style="font-family:Georgia,serif">主愛 · 澆灌 · 相契 · 生命</p>
       <button onclick="openOrderModal(true)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-10 py-4 rounded-full shadow-lg transition-all transform hover:-translate-y-1 hover:shadow-xl active:translate-y-0 text-sm md:text-base tracking-[0.2em] flex items-center gap-2 border border-white/25 backdrop-blur-sm">
         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        立即點餐
+        立即報名及點餐
       </button>
     </div>
   </header>
@@ -151,8 +154,9 @@
     <!-- ═══ TAB NAV ═══ -->
     <div id="tab-nav" class="flex flex-nowrap justify-start md:justify-center gap-2 mb-6 md:mb-10 bg-stone-200/50 p-1.5 mx-auto backdrop-blur-md shadow-inner mt-4 md:mt-12 overflow-x-auto w-full md:w-fit" style="border-radius:2.5rem">
       <button onclick="setActiveTab('schedule')" class="tab-btn bg-white text-emerald-600 shadow-md px-5 md:px-8 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 whitespace-nowrap" data-tab="schedule">聚會流程</button>
-      <button onclick="setActiveTab('spiritual')" class="tab-btn text-gray-500 hover:text-gray-700 px-5 md:px-8 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 whitespace-nowrap" data-tab="spiritual">同沐主愛</button>
+      <button onclick="setActiveTab('spiritual')" class="tab-btn text-gray-500 hover:text-gray-700 px-5 md:px-8 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 whitespace-nowrap" data-tab="spiritual">心靈時光</button>
       <button onclick="setActiveTab('menu')" class="tab-btn text-gray-500 hover:text-gray-700 px-5 md:px-8 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 whitespace-nowrap" data-tab="menu">午餐饗宴</button>
+      <button onclick="setActiveTab('riverside')" class="tab-btn text-gray-500 hover:text-gray-700 px-5 md:px-8 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 whitespace-nowrap" data-tab="riverside">磺港溪左岸</button>
       <button onclick="setActiveTab('attractions')" class="tab-btn text-gray-500 hover:text-gray-700 px-5 md:px-8 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 whitespace-nowrap" data-tab="attractions">北投景點</button>
     </div>
 
@@ -163,7 +167,7 @@
 
         <div class="bg-white rounded-3xl shadow-lg border border-stone-100 p-6 flex items-start">
           <div class="flex flex-col items-center mr-6">
-            <div class="text-violet-600 font-black text-lg mb-2">10:30</div>
+            <div class="text-violet-600 font-black text-lg mb-2">10:00</div>
             <div class="w-0.5 min-h-[2.5rem] bg-stone-100"></div>
           </div>
           <div class="bg-stone-50 p-4 rounded-2xl flex-shrink-0 text-violet-500 mr-4 self-start">
@@ -184,11 +188,11 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 7 4 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9l4-2"/><path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/><path d="M18 22V5l-6-3-6 3v17"/><path d="M12 7v5"/><circle cx="12" cy="7" r="1"/></svg>
           </div>
           <div class="flex-1">
-            <h4 class="sched-title text-xl font-bold mb-1 text-gray-800 flex items-center transition-colors">同沐主愛
+            <h4 class="sched-title text-xl font-bold mb-1 text-gray-800 flex items-center transition-colors">心靈時光
               <svg class="sched-chevron w-5 h-5 ml-1 text-violet-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
             </h4>
             <p class="text-sm text-gray-500">北投區三合街一段117巷60號4樓</p>
-            <p class="text-xs text-violet-600 font-medium mt-1">詩歌敬拜 ／ 讚美禱告 ／ 事工交通</p>
+            <p class="text-xs text-violet-600 font-medium mt-1">音樂聲光 ／ 心情分享 ／ 主題對話</p>
           </div>
         </div>
 
@@ -208,7 +212,7 @@
           </div>
         </div>
 
-        <div class="schedule-clickable bg-white rounded-3xl shadow-lg border border-stone-100 p-6 flex items-start">
+        <div class="schedule-clickable bg-white rounded-3xl shadow-lg border border-stone-100 p-6 flex items-start cursor-pointer" onclick="setActiveTab('riverside')">
           <div class="flex flex-col items-center mr-6">
             <div class="text-violet-600 font-black text-lg mb-2">14:00</div>
           </div>
@@ -225,12 +229,12 @@
       </div>
 
 
-      <!-- ═══ 同沐主愛 ═══ -->
+      <!-- ═══ 心靈時光 ═══ -->
       <div id="tab-spiritual" class="tab-content">
         <div class="text-center mb-10">
-          <div class="inline-block bg-violet-50 px-4 py-1 rounded-full text-violet-500 text-[10px] font-black mb-3 uppercase tracking-widest">Fellowship · Worship</div>
-          <h2 class="text-3xl font-bold mb-3 text-gray-800" style="font-family:Georgia,serif">同沐主愛</h2>
-          <p class="text-gray-500 text-sm">在主愛中相聚，靈裡更新充電。</p>
+          <div class="inline-block bg-violet-50 px-4 py-1 rounded-full text-violet-500 text-[10px] font-black mb-3 uppercase tracking-widest">Pause · Listen · Connect</div>
+          <h2 class="text-3xl font-bold mb-3 text-gray-800" style="font-family:Georgia,serif">心靈時光</h2>
+          <p class="text-gray-500 text-sm">在繁忙之間留一段空白，聽見音樂，也聽見彼此。</p>
         </div>
         <div class="bg-violet-50 rounded-3xl p-5 mb-8 flex items-start gap-4 border border-violet-100">
           <div class="w-10 h-10 bg-violet-200 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -239,7 +243,7 @@
           <div>
             <p class="font-black text-violet-800 text-sm mb-0.5">聚會地點</p>
             <p class="font-bold text-gray-800">北投區三合街一段117巷60號4樓</p>
-            <p class="text-xs text-gray-500 mt-1">10:45 集合 ｜ 捷運奇岩站 1 號出口步行可達</p>
+            <p class="text-xs text-gray-500 mt-1">10:45 開始 ｜ 捷運奇岩站 1 號出口步行可達</p>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -247,33 +251,33 @@
             <div class="spirit-icon-box bg-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
               <svg class="w-6 h-6 text-violet-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
             </div>
-            <h4 class="font-bold text-xl mb-1 text-gray-800">詩歌敬拜</h4>
-            <p class="text-[10px] font-black uppercase text-gray-400 mb-4 tracking-widest">Worship Songs</p>
-            <p class="text-sm text-gray-600 leading-relaxed">以詩歌讚美獻上心意，在歌聲中親近主，開啟美好的敬拜。</p>
+            <h4 class="font-bold text-xl mb-1 text-gray-800">音樂聲光</h4>
+            <p class="text-[10px] font-black uppercase text-gray-400 mb-4 tracking-widest">Music &amp; Light</p>
+            <p class="text-sm text-gray-600 leading-relaxed">讓歌聲和光影為早晨定調，在舒服的節奏裡慢慢沉澱。</p>
           </div>
           <div class="spirit-card bg-rose-50 border border-rose-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all duration-500">
             <div class="spirit-icon-box bg-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
               <svg class="w-6 h-6 text-rose-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
-            <h4 class="font-bold text-xl mb-1 text-gray-800">讚美禱告</h4>
-            <p class="text-[10px] font-black uppercase text-gray-400 mb-4 tracking-widest">Praise & Prayer</p>
-            <p class="text-sm text-gray-600 leading-relaxed">彼此代禱守望，在恩典寶座前傾心吐意，同心仰望主的帶領。</p>
+            <h4 class="font-bold text-xl mb-1 text-gray-800">靜心片刻</h4>
+            <p class="text-[10px] font-black uppercase text-gray-400 mb-4 tracking-widest">Quiet Moment</p>
+            <p class="text-sm text-gray-600 leading-relaxed">給自己幾分鐘安靜，放下日常的嘈雜，重新感受內在的方向。</p>
           </div>
           <div class="spirit-card bg-emerald-50 border border-emerald-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all duration-500">
             <div class="spirit-icon-box bg-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
               <svg class="w-6 h-6 text-emerald-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
             </div>
-            <h4 class="font-bold text-xl mb-1 text-gray-800">生命的糧</h4>
-            <p class="text-[10px] font-black uppercase text-gray-400 mb-4 tracking-widest">Bread of Life</p>
-            <p class="text-sm text-gray-600 leading-relaxed">主題：箴言第一章。敬畏耶和華是知識的開端；愚妄人藐視智慧和訓誨。</p>
+            <h4 class="font-bold text-xl mb-1 text-gray-800">一頁閱讀</h4>
+            <p class="text-[10px] font-black uppercase text-gray-400 mb-4 tracking-widest">A Thought to Keep</p>
+            <p class="text-sm text-gray-600 leading-relaxed">從古老智慧中選讀一段文字，一起聊聊它與當下生活的距離。</p>
           </div>
           <div class="spirit-card bg-amber-50 border border-amber-100 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all duration-500">
             <div class="spirit-icon-box bg-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
               <svg class="w-6 h-6 text-amber-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
             </div>
-            <h4 class="font-bold text-xl mb-1 text-gray-800">交通分享</h4>
-            <p class="text-[10px] font-black uppercase text-gray-400 mb-4 tracking-widest">Fellowship Sharing</p>
-            <p class="text-sm text-gray-600 leading-relaxed">分享生活與事工近況，同工彼此關懷、同心守望，共同在主愛中連結。</p>
+            <h4 class="font-bold text-xl mb-1 text-gray-800">圍坐聊聊</h4>
+            <p class="text-[10px] font-black uppercase text-gray-400 mb-4 tracking-widest">Stories &amp; Sharing</p>
+            <p class="text-sm text-gray-600 leading-relaxed">分享近況與心得，不設標準答案，只留一張願意好好聽你說話的椅子。</p>
           </div>
         </div>
       </div>
@@ -286,12 +290,12 @@
             <div class="flex items-center gap-3">
               <span class="text-2xl">✨</span>
               <div>
-                <h4 class="font-bold text-gray-800 text-sm md:text-base">您已完成點餐登記</h4>
+                <h4 class="font-bold text-gray-800 text-sm md:text-base">您已完成報名及點餐</h4>
                 <p id="personal-order-summary" class="text-xs text-amber-700 mt-0.5"></p>
               </div>
             </div>
             <button onclick="openOrderModal()" class="text-xs bg-amber-600 hover:bg-amber-700 text-white font-bold px-4 py-2 rounded-xl transition-colors shadow-sm">
-              修改餐點
+              修改報名及餐點
             </button>
           </div>
         </div>
@@ -303,8 +307,8 @@
               <span class="bg-white/20 backdrop-blur text-xs font-black px-3 py-1 rounded-full border border-white/20">午餐饗宴</span>
               <span class="bg-amber-400/90 text-gray-900 text-xs font-black px-3 py-1 rounded-full flex items-center gap-1">⭐ 4.8 <span class="font-normal opacity-80">（303 則評論）</span></span>
             </div>
-            <h2 class="text-3xl md:text-4xl font-bold mb-1">對味廚房 銀光食驗室</h2>
-            <p class="text-emerald-100 text-sm mb-5 font-light">每一道料理都是精心挑選食材，用心從「原料」開始製作</p>
+            <h2 class="text-3xl md:text-4xl font-bold mb-1">銀光食驗室</h2>
+            <p class="text-emerald-100 text-sm mb-5 font-light">「品嘗一盤真正好食材做的健康料理」</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
               <div class="space-y-3">
                 <!-- 餐廳資訊卡 -->
@@ -336,8 +340,44 @@
           </div>
         </div>
 
-        <!-- 評論精選 -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- 最新餐廳菜單 -->
+        <section class="bg-white rounded-3xl shadow-xl border border-stone-100 overflow-hidden">
+          <header class="p-6 md:p-8 text-center border-b border-stone-100">
+            <p class="text-xs tracking-[.25em] text-emerald-600 font-black mb-2">DINNER &amp; WEEKEND MENU</p>
+            <h3 class="text-2xl font-black text-gray-800">對味廚房銀光食驗室菜單</h3>
+            <p class="text-sm text-gray-500 mt-2">以當季食材與細心烹調，為北投漫行準備一桌溫暖好味道</p>
+          </header>
+          <div class="m-5 p-4 rounded-2xl bg-amber-50 border border-amber-100 text-xs text-amber-800"><strong>AI 圖片說明：</strong>餐點圖片僅供示意；實際內容、擺盤與份量以現場供餐為準。</div>
+          <div class="p-5 md:p-7 space-y-8">
+            <div>
+              <h4 class="text-xl font-black text-emerald-800 mb-4">義大利麵 <span class="text-sm font-normal text-gray-400">Pasta</span></h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-tomato-pasta_20260519_205242.jpg" alt="蕃茄臘肉麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">蕃茄臘肉麵</h5><p class="text-xs text-gray-500 mt-1">酸甜蕃茄醬汁搭配煙燻臘肉，鹹香濃郁。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-lasagna_20260519_205137.jpg" alt="蕃茄乳酪麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">蕃茄乳酪麵</h5><p class="text-xs text-gray-500 mt-1">蕃茄與乳酪細火燉煮，柔滑濃香。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-braised-chicken_20260519_205023.jpg" alt="清炒蕃茄香腸肉麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">清炒蕃茄香腸肉麵</h5><p class="text-xs text-gray-500 mt-1">自製香腸肉與蕃茄清炒，經典義式家常風味。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-bbq-squid_20260525_142230.png" alt="青醬透抽麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">青醬透抽麵</h5><p class="text-xs text-gray-500 mt-1">自製羅勒青醬搭配嫩烤透抽，鮮香交融。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-pesto-pizza_20260519_205320.jpg" alt="青醬乳酪與風乾蕃茄麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">青醬乳酪與風乾蕃茄麵</h5><p class="text-xs text-gray-500 mt-1">清新羅勒、濃郁乳酪與風乾蕃茄層次分明。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-ratatouille_20260519_205058.jpg" alt="清炒松露野菇麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">清炒松露野菇麵 <span class="text-xs text-emerald-600">蛋奶素</span></h5><p class="text-xs text-gray-500 mt-1">多種野菇清炒，佐以黑松露提香。</p></div></article>
+                <article class="rounded-2xl border border-stone-100 overflow-hidden"><img src="menu-salad_20260519_205210.jpg" alt="酒醋時蔬麵" class="w-full h-36 object-cover"><div class="p-4"><h5 class="font-black">酒醋時蔬麵 <span class="text-xs text-emerald-600">全素</span></h5><p class="text-xs text-gray-500 mt-1">時令蔬菜與酒醋快炒，酸香平衡。</p></div></article>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-xl font-black text-emerald-800 mb-4">燒烤主菜 <span class="text-sm font-normal text-gray-400">Main</span></h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <article class="rounded-2xl border border-stone-100 p-4"><h5 class="font-black">🦑 燒烤透抽</h5><p class="text-xs text-gray-500 mt-1">火候精準，口感 Q 彈。</p></article>
+                <article class="rounded-2xl border border-stone-100 p-4"><h5 class="font-black">🐟 燒烤鮮魚</h5><p class="text-xs text-gray-500 mt-1">生態養殖鮮魚，保留食材原味。</p></article>
+                <article class="rounded-2xl border border-stone-100 p-4"><h5 class="font-black">🍗 燒烤雞腿排</h5><p class="text-xs text-gray-500 mt-1">低溫蒸煮後烙烤，柔嫩多汁。</p></article>
+                <article class="rounded-2xl border border-stone-100 p-4"><h5 class="font-black">🦆 油封鴨腿</h5><p class="text-xs text-gray-500 mt-1">經典法式慢煮，外酥內嫩。</p></article>
+                <article class="rounded-2xl border border-stone-100 p-4"><h5 class="font-black">🍤 蒜味油封蝦</h5><p class="text-xs text-gray-500 mt-1">蒜香橄欖油低溫油封，肉質彈嫩。</p></article>
+                <article class="rounded-2xl border border-stone-100 p-4"><h5 class="font-black">🍛 瑪莎曼咖哩燉牛筋</h5><p class="text-xs text-gray-500 mt-1">辛香溫潤，口感柔軟入味。</p></article>
+              </div>
+            </div>
+            <p class="text-center text-xs text-gray-400">餐點內容依餐廳當日供應為準</p>
+          </div>
+        </section>
+
+        <!-- 評論精選（舊版隱藏） -->
+        <div class="hidden grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="bg-white rounded-2xl shadow border border-stone-100 p-4">
             <div class="flex gap-1 text-amber-400 text-sm mb-2">★★★★★</div>
             <p class="text-sm text-gray-700 leading-relaxed italic">「料理超級美味！每一道料理都是精心挑選食材，用心從原料開始製作。」</p>
@@ -356,7 +396,7 @@
         </div>
 
         <!-- 招牌料理 -->
-        <div class="bg-white rounded-3xl shadow-xl border border-stone-100 overflow-hidden">
+        <div class="hidden bg-white rounded-3xl shadow-xl border border-stone-100 overflow-hidden">
           <div class="p-5 md:p-7 border-b border-stone-100 flex items-center gap-3">
             <div class="bg-emerald-50 p-2.5 rounded-xl">
               <svg class="w-5 h-5 text-emerald-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
@@ -510,6 +550,37 @@
 
 
 
+      </div>
+
+      <!-- ═══ RIVERSIDE ═══ -->
+      <div id="tab-riverside" class="tab-content">
+        <div class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-stone-100">
+          <div class="eco-header p-10 md:p-14 text-center text-white" style="background:linear-gradient(135deg,#0f766e,#15803d)">
+            <svg class="w-14 h-14 mx-auto mb-5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            <h2 class="text-3xl md:text-4xl font-black mb-3">磺港溪左岸</h2>
+            <p class="text-emerald-50 leading-relaxed">「享受樹比人多的靜謐自在，伴隨小河悠然流淌的舒暢時光」</p>
+          </div>
+          <div class="p-6 md:p-10 space-y-9">
+            <section>
+              <h3 class="text-xl font-black text-emerald-800 mb-3">第一部分｜奇岩重劃區：都市中的生態綠洲</h3>
+              <p class="text-gray-600 leading-8">在寸土寸金的臺北市，藏著一處約十七公頃的生態綠洲。這裡西倚磺港溪生態藍帶，東臨軍艦岩親山步道，高覆綠率與低建蔽率留下日照、開闊視野與充滿呼吸感的街廓。</p>
+            </section>
+            <section class="border-t border-stone-100 pt-8">
+              <h3 class="text-xl font-black text-emerald-800 mb-3">第二部分｜磺港溪再造：流動的生態藍帶</h3>
+              <p class="text-gray-600 leading-8 mb-6">溪流再造與親水計畫，讓舊式排水溝逐步變成蜒蜒的親水廊道。漫步溪畔，可以聽見水聲，偶爾遇見翠鳥與白鷺鷗，在離城不遠的地方找到自然的節奏。</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <a href="https://www.youtube.com/watch?v=RoJQjmk4CrM" target="_blank" rel="noopener noreferrer" class="video-thumb block bg-stone-50 rounded-3xl overflow-hidden border border-stone-100">
+                  <img src="https://img.youtube.com/vi/RoJQjmk4CrM/maxresdefault.jpg" alt="北投奇岩重劃區生態巡禮" class="w-full h-44 object-cover" loading="lazy"/>
+                  <p class="p-4 font-bold text-gray-800">▶ 北投奇岩重劃區生態巡禮</p>
+                </a>
+                <a href="https://www.youtube.com/watch?v=aubzV9YQ7rs" target="_blank" rel="noopener noreferrer" class="video-thumb block bg-stone-50 rounded-3xl overflow-hidden border border-stone-100">
+                  <img src="https://img.youtube.com/vi/aubzV9YQ7rs/maxresdefault.jpg" alt="磺港溪與磺港公園再造紀錄" class="w-full h-44 object-cover" loading="lazy"/>
+                  <p class="p-4 font-bold text-gray-800">▶ 磺港溪與磺港公園再造紀錄</p>
+                </a>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
 
       <!-- ═══ ATTRACTIONS ═══ -->
@@ -690,8 +761,8 @@
         <div class="flex items-center gap-3">
           <span class="text-2xl">🍱</span>
           <div>
-            <h3 class="font-bold text-lg">基督的羊聚會點餐</h3>
-            <p class="text-xs text-emerald-100 opacity-90">請填寫點餐資訊，以利同工統計</p>
+            <h3 class="font-bold text-lg">活動線上報名</h3>
+            <p class="text-xs text-emerald-100 opacity-90">請填寫人數與餐點，以利座位及餐點統計</p>
           </div>
         </div>
         <button onclick="closeOrderModal()" class="hover:opacity-75 transition-opacity text-white/80">
@@ -711,80 +782,33 @@
             class="w-full bg-stone-50 rounded-2xl px-4 py-3 text-sm outline-none border border-stone-200 focus:border-emerald-500 transition-colors" />
         </div>
 
-        <!-- Meal Info -->
-        <div class="bg-emerald-50 border border-emerald-100 rounded-3xl p-5">
-          <div class="flex justify-between items-center mb-2">
-            <h4 class="font-black text-emerald-800 text-base">舒食套餐組</h4>
-            <span class="bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full font-bold">包含附餐</span>
-          </div>
-          <p class="text-xs text-emerald-700 leading-relaxed">
-            本套餐含：<strong>時蔬沙拉、鮮蔬濃湯、甜點、飲品</strong>，下方請選擇您想搭配的一道主菜。
-          </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <label class="text-sm font-bold text-gray-700">報名總人數<input id="reg-count" type="number" min="1" max="100" value="1" class="mt-2 w-full bg-stone-50 rounded-2xl px-4 py-3 border border-stone-200"></label>
+          <label class="text-sm font-bold text-gray-700">大人人數<input id="reg-adults" type="number" min="0" value="1" class="mt-2 w-full bg-stone-50 rounded-2xl px-4 py-3 border border-stone-200"></label>
+          <label class="text-sm font-bold text-gray-700">小孩人數<input id="reg-children" type="number" min="0" value="0" class="mt-2 w-full bg-stone-50 rounded-2xl px-4 py-3 border border-stone-200"></label>
         </div>
 
-        <!-- Main Course Options -->
-        <div>
-          <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">
-            <span>🥩</span> 選擇主菜 (單選) <span class="text-red-500">*</span>
-          </label>
-          <div class="space-y-2.5" id="main-course-options">
-            
-            <label class="flex items-center gap-3 p-3.5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/35 transition-all cursor-pointer">
-              <input type="radio" name="main-course" value="燒烤搖滾雞腿排" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-stone-300" />
-              <div class="flex-1">
-                <span class="text-sm font-bold text-gray-800">燒烤搖滾雞腿排</span>
-              </div>
-            </label>
+        <div class="bg-emerald-50 border border-emerald-100 rounded-3xl p-5">
+          <h4 class="font-black text-emerald-800 text-base mb-2">🍽️ 午餐餐點選擇 <span id="menu-selected-status" class="float-right text-xs">已選 0 / 1 份</span></h4>
+          <p class="text-xs text-emerald-700 leading-relaxed">每人限選一份主餐；所有餐點份數合計必須與報名總人數一致。實際內容依餐廳當日供應為準。</p>
+        </div>
 
-            <label class="flex items-center gap-3 p-3.5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/35 transition-all cursor-pointer">
-              <input type="radio" name="main-course" value="紅酒燴牛筋" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-stone-300" />
-              <div class="flex-1">
-                <span class="text-sm font-bold text-gray-800">紅酒燴牛筋</span>
-              </div>
-            </label>
-
-            <label class="flex items-center gap-3 p-3.5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/35 transition-all cursor-pointer">
-              <input type="radio" name="main-course" value="燒烤時蔬（素食）" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-stone-300" />
-              <div class="flex-1">
-                <span class="text-sm font-bold text-gray-800">燒烤時蔬 <span class="text-xs text-emerald-600 bg-emerald-100/70 px-1.5 py-0.5 rounded font-normal font-bold">素食</span></span>
-              </div>
-            </label>
-
-            <label class="flex items-center gap-3 p-3.5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/35 transition-all cursor-pointer">
-              <input type="radio" name="main-course" value="燒烤邱家好魚" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-stone-300" />
-              <div class="flex-1">
-                <span class="text-sm font-bold text-gray-800">燒烤邱家好魚</span>
-              </div>
-            </label>
-
-            <label class="flex items-center gap-3 p-3.5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/35 transition-all cursor-pointer">
-              <input type="radio" name="main-course" value="燒烤永續豬肉" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-stone-300" />
-              <div class="flex-1">
-                <span class="text-sm font-bold text-gray-800">燒烤永續豬肉</span>
-              </div>
-            </label>
-
-            <label class="flex items-center gap-3 p-3.5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/35 transition-all cursor-pointer">
-              <input type="radio" name="main-course" value="蒜味油封蝦" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-stone-300" />
-              <div class="flex-1">
-                <span class="text-sm font-bold text-gray-800">蒜味油封蝦</span>
-              </div>
-            </label>
-
-            <label class="flex items-center gap-3 p-3.5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/35 transition-all cursor-pointer">
-              <input type="radio" name="main-course" value="燒烤油封履歷鴨腿" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-stone-300" />
-              <div class="flex-1">
-                <span class="text-sm font-bold text-gray-800">燒烤油封履歷鴨腿</span>
-              </div>
-            </label>
-
-            <label class="flex items-center gap-3 p-3.5 bg-stone-50 rounded-2xl border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/35 transition-all cursor-pointer">
-              <input type="radio" name="main-course" value="和牛牛排" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-stone-300" />
-              <div class="flex-1">
-                <span class="text-sm font-bold text-gray-800">和牛牛排</span>
-              </div>
-            </label>
-
+        <div id="main-course-options" class="space-y-2">
+          <p class="text-sm font-bold text-gray-700 mb-3">請依報名人數點選主餐份數：</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <label class="meal-qty">🍝 蕃茄臘肉麵<input type="number" class="menu-item-qty" data-dish="蕃茄臘肉麵" min="0" value="0"></label>
+            <label class="meal-qty">🍅 蕃茄乳酪麵<input type="number" class="menu-item-qty" data-dish="蕃茄乳酪麵" min="0" value="0"></label>
+            <label class="meal-qty">🍝 清炒蕃茄香腸肉麵<input type="number" class="menu-item-qty" data-dish="清炒蕃茄香腸肉麵" min="0" value="0"></label>
+            <label class="meal-qty">🦑 青醬透抽麵<input type="number" class="menu-item-qty" data-dish="青醬透抽麵" min="0" value="0"></label>
+            <label class="meal-qty">🌿 青醬乳酪與風乾蕃茄麵<input type="number" class="menu-item-qty" data-dish="青醬乳酪與風乾蕃茄麵" min="0" value="0"></label>
+            <label class="meal-qty">🍄 清炒松露野菇麵（蛋奶素）<input type="number" class="menu-item-qty" data-dish="清炒松露野菇麵（蛋奶素）" min="0" value="0"></label>
+            <label class="meal-qty">🥬 酒醋時蔬麵（全素）<input type="number" class="menu-item-qty" data-dish="酒醋時蔬麵（全素）" min="0" value="0"></label>
+            <label class="meal-qty">🦑 燒烤透抽<input type="number" class="menu-item-qty" data-dish="燒烤透抽" min="0" value="0"></label>
+            <label class="meal-qty">🐟 燒烤鮮魚<input type="number" class="menu-item-qty" data-dish="燒烤鮮魚" min="0" value="0"></label>
+            <label class="meal-qty">🍗 燒烤雞腿排<input type="number" class="menu-item-qty" data-dish="燒烤雞腿排" min="0" value="0"></label>
+            <label class="meal-qty">🦆 油封鴨腿<input type="number" class="menu-item-qty" data-dish="油封鴨腿" min="0" value="0"></label>
+            <label class="meal-qty">🍤 蒜味油封蝦<input type="number" class="menu-item-qty" data-dish="蒜味油封蝦" min="0" value="0"></label>
+            <label class="meal-qty">🍛 瑪莎曼咖哩燉牛筋<input type="number" class="menu-item-qty" data-dish="瑪莎曼咖哩燉牛筋" min="0" value="0"></label>
           </div>
         </div>
 
@@ -876,8 +900,6 @@
     document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => setActiveTab(btn.dataset.tab)));
 
     // 頁面載入時初始化
-    localStorage.removeItem('g12_order_name');
-    localStorage.removeItem('g12_order_main');
     loadWeather();
     loadBibleVerse();
     updateMenuTabDisplay();
@@ -1015,33 +1037,28 @@
       const modal = document.getElementById('order-modal');
       const card = document.getElementById('order-modal-card');
       modal.classList.remove('hidden');
-      
-      if (clear) {
-        // 啟動"立即點餐"按鈕時清空資料
-        document.getElementById('order-name').value = '';
-        const radios = document.getElementsByName('main-course');
-        for (let i = 0; i < radios.length; i++) {
-          radios[i].checked = false;
-        }
-      } else {
-        // 修改餐點時載入本機已存資料
-        const savedName = localStorage.getItem('g12_order_name') || '';
-        const savedMain = localStorage.getItem('g12_order_main') || '';
-        document.getElementById('order-name').value = savedName;
-        const radios = document.getElementsByName('main-course');
-        for (let i = 0; i < radios.length; i++) {
-          if (savedMain && radios[i].value === savedMain) {
-            radios[i].checked = true;
-          } else {
-            radios[i].checked = false;
-          }
-        }
-      }
+      document.getElementById('order-name').value = clear ? '' : (localStorage.getItem('g12_order_name') || '');
+      document.getElementById('reg-count').value = clear ? 1 : (localStorage.getItem('g12_reg_count') || 1);
+      document.getElementById('reg-adults').value = clear ? 1 : (localStorage.getItem('g12_reg_adults') || 1);
+      document.getElementById('reg-children').value = clear ? 0 : (localStorage.getItem('g12_reg_children') || 0);
+      const savedMeals = clear ? {} : JSON.parse(localStorage.getItem('g12_order_meals') || '{}');
+      document.querySelectorAll('.menu-item-qty').forEach(input => { input.value = savedMeals[input.dataset.dish] || 0; });
+      updateMealCount();
       
       setTimeout(() => {
         card.classList.remove('scale-95', 'opacity-0');
       }, 50);
     }
+
+    function updateMealCount() {
+      const total = Math.max(1, Number(document.getElementById('reg-count').value) || 1);
+      const selected = [...document.querySelectorAll('.menu-item-qty')].reduce((sum, input) => sum + (Number(input.value) || 0), 0);
+      const status = document.getElementById('menu-selected-status');
+      status.textContent = `已選 ${selected} / ${total} 份`;
+      status.className = 'float-right text-xs ' + (selected === total ? 'text-emerald-700' : 'text-red-500');
+    }
+    document.getElementById('reg-count').addEventListener('input', updateMealCount);
+    document.querySelectorAll('.menu-item-qty').forEach(input => input.addEventListener('input', updateMealCount));
     
     function closeOrderModal() {
       const modal = document.getElementById('order-modal');
@@ -1079,7 +1096,7 @@
     // ── FIREBASE REALTIME SYNC ──
     function loadOrdersFromFirebase() {
       if (!db) return;
-      db.collection('christs_sheep_1003').orderBy('timestamp', 'asc').onSnapshot((querySnapshot) => {
+      db.collection('cmu_ph12_registrations').where('source', '==', 'Christs_sheep_1003').onSnapshot((querySnapshot) => {
         const orders = [];
         const tally = {};
         querySnapshot.forEach((doc) => {
@@ -1130,27 +1147,33 @@
       });
     }
 
-    function submitOrderToFirebase(name, mainDish) {
+    function submitOrderToFirebase(name, total, adults, children, meals, mealSummary) {
       if (!db) {
         return Promise.reject(new Error("Firebase is not initialized."));
       }
-      return db.collection('christs_sheep_1003').doc(name).set({
+      return db.collection('cmu_ph12_registrations').add({
         name: name,
         姓名: name,
-        meal: "舒食套餐組",
-        套餐: "舒食套餐組",
-        main: mainDish,
-        主菜: mainDish,
+        total: total,
+        總人數: total,
+        adults: adults,
+        大人: adults,
+        children: children,
+        小孩: children,
+        meals: meals,
+        main: mealSummary,
+        餐點: mealSummary,
+        source: 'Christs_sheep_1003',
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         created_at: firebase.firestore.FieldValue.serverTimestamp()
       });
     }
 
     // ── SEND EMAIL NOTIFICATION (AUTOMATIC) ──
-    function sendOrderEmail(name, mainDish) {
+    function sendOrderEmail(name, total, adults, children, mealSummary) {
       const emailTo = "taiwan.kwei@ceci.com.tw,g0306@ceci.com.tw,taiwan.kwei@gmail.com";
-      const subject = `【基督的羊聚會點餐登記】${name} - ${mainDish}`;
-      const body = `【基督的羊聚會點餐登記】\n姓名：${name}\n套餐：舒食套餐組 (含時蔬沙拉、鮮蔬濃湯、甜點、飲品)\n主菜：${mainDish}`;
+      const subject = `【基督的羊聚會報名及點餐】${name} - ${total} 人`;
+      const body = `【基督的羊聚會報名及點餐】\n姓名：${name}\n總人數：${total}\n大人：${adults}\n小孩：${children}\n餐點：${mealSummary}`;
       
       // Use FormSubmit API for 100% automated background email delivery
       fetch("https://formsubmit.co/ajax/taiwan.kwei@gmail.com", {
@@ -1161,8 +1184,10 @@
         },
         body: JSON.stringify({
           "姓名": name,
-          "套餐": "舒食套餐組 (含時蔬沙拉、鮮蔬濃湯、甜點、飲品)",
-          "主菜": mainDish,
+          "總人數": total,
+          "大人": adults,
+          "小孩": children,
+          "餐點": mealSummary,
           "_cc": "taiwan.kwei@ceci.com.tw,g0306@ceci.com.tw",
           "_subject": subject,
           "_template": "table"
@@ -1194,14 +1219,26 @@
         alert('請輸入姓名！');
         return;
       }
-      
-      const selectedRadio = document.querySelector('input[name="main-course"]:checked');
-      if (!selectedRadio) {
-        alert('請選擇一道主菜！');
+
+      const total = Number(document.getElementById('reg-count').value) || 0;
+      const adults = Number(document.getElementById('reg-adults').value) || 0;
+      const children = Number(document.getElementById('reg-children').value) || 0;
+      if (total < 1 || adults + children !== total) {
+        alert('請確認大人與小孩人數合計等於報名總人數！');
         return;
       }
-      
-      const mainDish = selectedRadio.value;
+
+      const meals = {};
+      document.querySelectorAll('.menu-item-qty').forEach(input => {
+        const qty = Number(input.value) || 0;
+        if (qty > 0) meals[input.dataset.dish] = qty;
+      });
+      const selectedMeals = Object.values(meals).reduce((sum, qty) => sum + qty, 0);
+      if (selectedMeals !== total) {
+        alert(`餐點共選 ${selectedMeals} 份，必須與報名總人數 ${total} 人一致！`);
+        return;
+      }
+      const mealSummary = Object.entries(meals).map(([dish, qty]) => `${dish} × ${qty}`).join('、');
       
       // 1. 立即停用按鈕以防重複點擊，並顯示載入狀態
       const submitBtn = document.querySelector('#order-modal button[onclick*="submitOrder"]');
@@ -1211,19 +1248,23 @@
       }
       
       localStorage.setItem('g12_order_name', name);
-      localStorage.setItem('g12_order_main', mainDish);
-      
-      const copyText = `【基督的羊聚會點餐登記】\n姓名：${name}\n套餐：舒食套餐組 (含時蔬沙拉、鮮蔬濃湯、甜點、飲品)\n主菜：${mainDish}`;
+      localStorage.setItem('g12_order_main', mealSummary);
+      localStorage.setItem('g12_order_meals', JSON.stringify(meals));
+      localStorage.setItem('g12_reg_count', total);
+      localStorage.setItem('g12_reg_adults', adults);
+      localStorage.setItem('g12_reg_children', children);
+
+      const copyText = `【基督的羊聚會報名及點餐】\n姓名：${name}\n總人數：${total}\n大人：${adults}\n小孩：${children}\n餐點：${mealSummary}`;
       
       // 2. 立即在背景非同步寫入 Firebase Firestore
-      submitOrderToFirebase(name, mainDish).then(() => {
+      submitOrderToFirebase(name, total, adults, children, meals, mealSummary).then(() => {
         console.log("Firebase sync completed in background.");
       }).catch(err => {
         console.error("Firebase sync failed in background:", err);
       });
 
       // 3. 立即在背景非同步發送電子郵件
-      sendOrderEmail(name, mainDish);
+      sendOrderEmail(name, total, adults, children, mealSummary);
 
       // 4. 立即複製點餐內容到剪貼簿
       navigator.clipboard.writeText(copyText).catch(err => {
@@ -1231,7 +1272,7 @@
       });
 
       // 5. 立即回應「點餐成功，謝謝」並關閉視窗與更新標籤頁顯示
-      alert('點餐成功，謝謝');
+      alert('報名及點餐完成，謝謝！');
       closeOrderModal();
       updateMenuTabDisplay();
       
@@ -1252,7 +1293,8 @@
       
       if (name && main) {
         card.classList.remove('hidden');
-        summary.innerHTML = `登記姓名：<strong>${name}</strong> ｜ 選擇主菜：<strong>${main}</strong> (舒食套餐組)`;
+        const count = localStorage.getItem('g12_reg_count') || 1;
+        summary.innerHTML = `登記姓名：<strong>${name}</strong> ｜ <strong>${count} 人</strong> ｜ 餐點：<strong>${main}</strong>`;
       } else {
         card.classList.add('hidden');
       }
