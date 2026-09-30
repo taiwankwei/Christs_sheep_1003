@@ -1202,11 +1202,8 @@
 
     let db = null;
     const REGISTRATION_COLLECTION = 'Christs_sheep_1003';
-    const NOTIFICATION_RECIPIENTS = [
-      'taiwan.kwei@gmail.com',
-      'g0306@ceci.com.tw',
-      'taiwan.kwei@ceci.com.tw'
-    ];
+    // Google Apps Script Web App URL(部署方式見 GoogleAppsScript.js);收件人設定在該腳本內
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbyvJhYdXLPpmnQNJdoHVkyIGb1vMalr4sSMxAcpmqNwpqeQdZPPS3m6Q5hAUd5R_qGpWg/exec';
     try {
       if (typeof firebase !== 'undefined') {
         firebase.initializeApp(firebaseConfig);
@@ -1240,40 +1237,22 @@
 
     // ── SEND EMAIL NOTIFICATION (AUTOMATIC) ──
     function sendOrderEmail(name, total, adults, children, mealSummary) {
-      const subject = `【基督的羊聚會報名及點餐】${name} - ${total} 人`;
-
-      return fetch("https://formsubmit.co/ajax/taiwan.kwei@gmail.com", {
-        method: "POST",
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+      if (!GAS_URL) {
+        return Promise.reject(new Error('GAS_URL is not configured.'));
+      }
+      // no-cors: 無法讀取回應,fetch 只要成功送出就視為已交給 Apps Script 處理
+      return fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
           "姓名": name,
           "總人數": total,
           "大人": adults,
           "小孩": children,
           "餐點": mealSummary,
-          "_cc": NOTIFICATION_RECIPIENTS.slice(1).join(','),
-          "_subject": subject,
-          "_template": "table",
-          "_captcha": "false"
+          "報名時間": new Date().toLocaleString('zh-TW')
         })
-      })
-      .then(async response => {
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok || data.success === false) {
-          throw new Error(data.message || `Email service returned ${response.status}.`);
-        }
-        return data;
-      })
-      .then(data => {
-        console.log("Email auto-sent successfully:", data);
-        return data;
-      })
-      .catch(error => {
-        console.error("Failed to auto-send email:", error);
-        throw error;
       });
     }
 
