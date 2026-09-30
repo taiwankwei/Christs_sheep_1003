@@ -1,0 +1,64 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /wordcloud_words/{document} {
+      allow read, write: if true;
+    }
+
+    match /claude_share_registrations/{docId} {
+      allow create: if request.resource.data.keys().hasAll([
+        'name', 'email', 'motivation', 'preferredSlots'
+      ]);
+      allow read, update, delete: if false;
+    }
+
+    match /Christs_sheep_1003/{registrationId} {
+      allow create: if isValidRegistration(request.resource.data);
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidRegistration(data) {
+      return data.keys().hasAll([
+          'name', '姓名', 'total', '總人數', 'adults', '大人',
+          'children', '小孩', 'meals', 'main', '餐點', 'source',
+          'timestamp', 'created_at'
+        ])
+        && data.keys().hasOnly([
+          'name', '姓名', 'total', '總人數', 'adults', '大人',
+          'children', '小孩', 'meals', 'main', '餐點', 'source',
+          'timestamp', 'created_at'
+        ])
+        && data.name is string
+        && data.name.size() >= 1
+        && data.name.size() <= 80
+        && data.get('姓名', '') == data.name
+        && data.total is int
+        && data.total >= 1
+        && data.total <= 100
+        && data.get('總人數', -1) == data.total
+        && data.adults is int
+        && data.adults >= 0
+        && data.get('大人', -1) == data.adults
+        && data.children is int
+        && data.children >= 0
+        && data.get('小孩', -1) == data.children
+        && data.adults + data.children == data.total
+        && data.meals is map
+        && data.meals.size() >= 1
+        && data.meals.size() <= 13
+        && data.main is string
+        && data.main.size() >= 1
+        && data.main.size() <= 1000
+        && data.get('餐點', '') == data.main
+        && data.source == 'Christs_sheep_1003'
+        && data.timestamp == request.time
+        && data.created_at == request.time;
+    }
+
+  }
+}
