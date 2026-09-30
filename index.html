@@ -926,7 +926,7 @@
     <div class="w-full max-w-sm rounded-[2rem] bg-white p-8 text-center shadow-2xl border border-emerald-100">
       <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50 text-5xl" aria-hidden="true">🎉</div>
       <h3 class="text-2xl font-black text-emerald-800 mb-2">報名成功！</h3>
-      <p class="text-sm leading-6 text-gray-500 mb-6">已收到您的報名與餐點資訊，期待十月三日與您見面。</p>
+      <p id="registration-success-message" class="text-sm leading-6 text-gray-500 mb-6">已收到您的報名與餐點資訊，期待十月三日與您見面。</p>
       <button onclick="closeRegistrationSuccess()" class="w-full rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white shadow-md transition-colors hover:bg-emerald-700">好的，謝謝 ✨</button>
     </div>
   </div>
@@ -1174,8 +1174,12 @@
       }, 300);
     }
 
-    function showRegistrationSuccess() {
+    function showRegistrationSuccess(emailSent = true) {
       const success = document.getElementById('registration-success');
+      const message = document.getElementById('registration-success-message');
+      message.textContent = emailSent
+        ? '已收到您的報名與餐點資訊，通知郵件也已寄出，期待十月三日與您見面。'
+        : '報名與餐點資訊已保存，但通知郵件暫時無法寄出，請聯絡主辦人確認。';
       success.classList.remove('hidden');
       success.classList.add('flex');
     }
@@ -1197,6 +1201,12 @@
     };
 
     let db = null;
+    const REGISTRATION_COLLECTION = 'Christs_sheep_1003';
+    const NOTIFICATION_RECIPIENTS = [
+      'taiwan.kwei@gmail.com',
+      'g0306@ceci.com.tw',
+      'taiwan.kwei@ceci.com.tw'
+    ];
     try {
       if (typeof firebase !== 'undefined') {
         firebase.initializeApp(firebaseConfig);
@@ -1206,68 +1216,11 @@
       console.error("Firebase initialization failed:", e);
     }
 
-    // Initialize Firebase Realtime listener after DB is ready
-    loadOrdersFromFirebase();
-
-    // ── FIREBASE REALTIME SYNC ──
-    function loadOrdersFromFirebase() {
-      if (!db) return;
-      db.collection('cmu_ph12_registrations').where('source', '==', 'Christs_sheep_1003').onSnapshot((querySnapshot) => {
-        const orders = [];
-        const tally = {};
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          orders.push(data);
-          tally[data.main] = (tally[data.main] || 0) + 1;
-        });
-        renderOrdersList(orders, tally);
-      }, (error) => {
-        console.error("Error loading orders from Firebase:", error);
-      });
-    }
-
-    function renderOrdersList(orders, tally) {
-      const card = document.getElementById('firebase-orders-card');
-      const tallyContainer = document.getElementById('orders-tally-container');
-      const listContainer = document.getElementById('orders-list-container');
-      
-      if (!card || !tallyContainer || !listContainer) return;
-
-      if (orders.length === 0) {
-        card.classList.add('hidden');
-        return;
-      }
-      
-      card.classList.remove('hidden');
-      
-      tallyContainer.innerHTML = '';
-      for (const [dish, count] of Object.entries(tally)) {
-        const item = document.createElement('div');
-        item.className = 'bg-stone-50 rounded-2xl p-3 text-center border border-stone-150 shadow-sm';
-        item.innerHTML = `
-          <p class="text-[11px] text-stone-400 font-bold mb-0.5">${dish}</p>
-          <p class="text-lg font-black text-emerald-700">${count} 份</p>
-        `;
-        tallyContainer.appendChild(item);
-      }
-      
-      listContainer.innerHTML = '';
-      orders.forEach((order) => {
-        const item = document.createElement('div');
-        item.className = 'flex justify-between items-center bg-stone-50/50 hover:bg-stone-50 px-4 py-2.5 rounded-2xl border border-stone-100 transition-colors';
-        item.innerHTML = `
-          <span class="font-bold text-gray-800">${order.name}</span>
-          <span class="text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-bold">${order.main}</span>
-        `;
-        listContainer.appendChild(item);
-      });
-    }
-
     function submitOrderToFirebase(name, total, adults, children, meals, mealSummary) {
       if (!db) {
         return Promise.reject(new Error("Firebase is not initialized."));
       }
-      return db.collection('cmu_ph12_registrations').add({
+      return db.collection(REGISTRATION_COLLECTION).add({
         name: name,
         姓名: name,
         total: total,
@@ -1287,12 +1240,9 @@
 
     // ── SEND EMAIL NOTIFICATION (AUTOMATIC) ──
     function sendOrderEmail(name, total, adults, children, mealSummary) {
-      const emailTo = "taiwan.kwei@ceci.com.tw,g0306@ceci.com.tw,taiwan.kwei@gmail.com";
       const subject = `【基督的羊聚會報名及點餐】${name} - ${total} 人`;
-      const body = `【基督的羊聚會報名及點餐】\n姓名：${name}\n總人數：${total}\n大人：${adults}\n小孩：${children}\n餐點：${mealSummary}`;
-      
-      // Use FormSubmit API for 100% automated background email delivery
-      fetch("https://formsubmit.co/ajax/taiwan.kwei@gmail.com", {
+
+      return fetch("https://formsubmit.co/ajax/taiwan.kwei@gmail.com", {
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',
@@ -1304,32 +1254,30 @@
           "大人": adults,
           "小孩": children,
           "餐點": mealSummary,
-          "_cc": "taiwan.kwei@ceci.com.tw,g0306@ceci.com.tw",
+          "_cc": NOTIFICATION_RECIPIENTS.slice(1).join(','),
           "_subject": subject,
-          "_template": "table"
+          "_template": "table",
+          "_captcha": "false"
         })
       })
-      .then(response => response.json())
+      .then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || data.success === false) {
+          throw new Error(data.message || `Email service returned ${response.status}.`);
+        }
+        return data;
+      })
       .then(data => {
         console.log("Email auto-sent successfully:", data);
+        return data;
       })
       .catch(error => {
-        console.error("Failed to auto-send email, falling back to mailto:", error);
-        fallbackMailto(emailTo, subject, body);
+        console.error("Failed to auto-send email:", error);
+        throw error;
       });
     }
-    
-    function fallbackMailto(emailTo, subject, body) {
-      const mailtoUrl = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      const link = document.createElement('a');
-      link.href = mailtoUrl;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
 
-    function submitOrder() {
+    async function submitOrder() {
       const name = document.getElementById('order-name').value.trim();
       if (!name) {
         alert('請輸入姓名！');
@@ -1363,40 +1311,52 @@
         submitBtn.innerHTML = '<span>⏳</span> 正在傳送...';
       }
       
-      localStorage.setItem('g12_order_name', name);
-      localStorage.setItem('g12_order_main', mealSummary);
-      localStorage.setItem('g12_order_meals', JSON.stringify(meals));
-      localStorage.setItem('g12_reg_count', total);
-      localStorage.setItem('g12_reg_adults', adults);
-      localStorage.setItem('g12_reg_children', children);
-
       const copyText = `【基督的羊聚會報名及點餐】\n姓名：${name}\n總人數：${total}\n大人：${adults}\n小孩：${children}\n餐點：${mealSummary}`;
-      
-      // 2. 立即在背景非同步寫入 Firebase Firestore
-      submitOrderToFirebase(name, total, adults, children, meals, mealSummary).then(() => {
-        console.log("Firebase sync completed in background.");
-      }).catch(err => {
-        console.error("Firebase sync failed in background:", err);
-      });
 
-      // 3. 立即在背景非同步發送電子郵件
-      sendOrderEmail(name, total, adults, children, mealSummary);
+      try {
+        // Start both requests immediately after the user clicks submit.
+        const emailPromise = sendOrderEmail(name, total, adults, children, mealSummary);
+        const registrationPromise = submitOrderToFirebase(name, total, adults, children, meals, mealSummary);
+        const [registrationResult, emailResult] = await Promise.allSettled([
+          registrationPromise,
+          emailPromise
+        ]);
 
-      // 4. 立即複製點餐內容到剪貼簿
-      navigator.clipboard.writeText(copyText).catch(err => {
-        console.error('Failed to copy order info: ', err);
-      });
+        const emailSent = emailResult.status === 'fulfilled';
+        if (!emailSent) {
+          console.error('Email notification failed:', emailResult.reason);
+        }
 
-      // 5. 關閉報名視窗並顯示報名成功訊息框
-      closeOrderModal();
-      showRegistrationSuccess();
-      
-      // 6. 延遲恢復按鈕狀態（確保使用者關閉視窗後，下一次打開時按鈕已恢復，但期間不被重複點擊）
-      if (submitBtn) {
-        setTimeout(() => {
+        if (registrationResult.status === 'rejected') {
+          console.error('Registration submission failed:', registrationResult.reason);
+          const message = emailSent
+            ? '通知郵件已寄出，但報名資料無法保存。請聯絡主辦人確認，請勿重複送出。'
+            : '報名資料無法送出，請檢查網路後再試一次。您的資料尚未完成登記。';
+          alert(message);
+          return;
+        }
+
+        localStorage.setItem('g12_order_name', name);
+        localStorage.setItem('g12_order_main', mealSummary);
+        localStorage.setItem('g12_order_meals', JSON.stringify(meals));
+        localStorage.setItem('g12_reg_count', total);
+        localStorage.setItem('g12_reg_adults', adults);
+        localStorage.setItem('g12_reg_children', children);
+
+        navigator.clipboard.writeText(copyText).catch(err => {
+          console.error('Failed to copy order info:', err);
+        });
+
+        closeOrderModal();
+        showRegistrationSuccess(emailSent);
+      } catch (error) {
+        console.error('Unexpected registration error:', error);
+        alert('送出時發生未預期的錯誤，請稍後再試。');
+      } finally {
+        if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = '<span>✔️</span> 送出';
-        }, 500);
+        }
       }
     }
 
